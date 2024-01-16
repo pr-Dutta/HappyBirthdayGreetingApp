@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import com.example.happybirthday.ui.theme.HappyBirthdayTheme
 import androidx.compose.foundation.Image                                 // manually added
 import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.layout.ContentScale
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,10 +84,16 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
     * one in the top of other */
 
     // - (14-01-2024)               ----   I have to rigorously revise the entire data flow
+
+    /* Box Composable is a container which stacks it's element one above the another */
     Box {
         Image(
             painter = image,
-            contentDescription = null
+            contentDescription = null,
+
+            // -- (16-01-2024)
+            contentScale = ContentScale.Crop,
+            alpha = 0.5F            // alpha for opacity
         )
 
         GreetingText(
