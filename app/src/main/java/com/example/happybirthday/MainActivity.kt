@@ -23,6 +23,7 @@ import com.example.happybirthday.ui.theme.HappyBirthdayTheme
 import androidx.compose.foundation.Image                                 // manually added
 import androidx.compose.foundation.layout.Box
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,9 +35,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GreetingImage(                         // - (14-01-2024)
-                        message = "Happy Birthday Sam!",
-                        from = "From Emma"
+                    GreetingImage(
+                                            /* - (18-01-2024) */
+                        message = stringResource(R.string.happy_birthday_text),
+                        from = stringResource(R.string.signature_text)
                     )
                 }
             }
@@ -52,8 +54,8 @@ fun GreetingText(
     modifier: Modifier = Modifier
 ) {
     Column(     // (11-01-2024)
-        verticalArrangement = Arrangement.Center,
-        modifier = modifier.padding(8.dp)
+        verticalArrangement = Arrangement.Center,     // - (17-01-2024)
+        modifier = modifier.padding(8.dp)          // padding
     ) {
         Text(   // (11-01-2024)
             text = message,
@@ -66,7 +68,7 @@ fun GreetingText(
             text = from,
             fontSize = 36.sp,
             modifier = Modifier
-                .padding(16.dp)
+                .padding(16.dp)                     // padding
                 .align(Alignment.End)
         )
     }
@@ -91,9 +93,9 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
             painter = image,
             contentDescription = null,
 
-            // -- (16-01-2024)
+            // -- (16-01-2024) -- ContentScale for scaling the image
             contentScale = ContentScale.Crop,
-            alpha = 0.5F            // alpha for opacity
+            alpha = 0.5f            // alpha for opacity
         )
 
         GreetingText(
@@ -116,9 +118,9 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
 @Composable
 fun BirthdayCardPreview() {
     HappyBirthdayTheme {
-        GreetingImage(                              // - (14-01-2024)
-            message = "Happy Birthday Sam!",
-            from = "From Emma"
+        GreetingImage(                        // - (18-01-2024)
+            message = stringResource(R.string.happy_birthday_text),
+            from = stringResource(R.string.signature_text)
         )
     }
 }
