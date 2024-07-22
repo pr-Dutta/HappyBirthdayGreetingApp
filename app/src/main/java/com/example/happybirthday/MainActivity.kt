@@ -36,7 +36,9 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     GreetingImage(
-                                            /* - (18-01-2024) */
+                        /* - (18-01-2024), By putting all the string in one place
+                        * It's easier to reuse those string and also easier to
+                        * translate all the string to different lang. */
                         message = stringResource(R.string.happy_birthday_text),
                         from = stringResource(R.string.signature_text)
                     )
@@ -61,7 +63,7 @@ fun GreetingText(
             text = message,
             fontSize = 96.sp,
             lineHeight = 116.sp,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center            // new - (21-01-2024)
         )
         Text(
             // From the next element textAlign doesn't works
@@ -69,7 +71,7 @@ fun GreetingText(
             fontSize = 36.sp,
             modifier = Modifier
                 .padding(16.dp)                     // padding
-                .align(Alignment.End)
+                .align(Alignment.CenterHorizontally)    // - (21-01-2024)
         )
     }
 }
@@ -93,16 +95,17 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
             painter = image,
             contentDescription = null,
 
-            // -- (16-01-2024) -- ContentScale for scaling the image
-            contentScale = ContentScale.Crop,
+            // -- (21-01-2024) -- ContentScale for scaling the image
+            contentScale = ContentScale.Crop,   // new
             alpha = 0.5f            // alpha for opacity
         )
 
         GreetingText(
             message = message,
             from = from,
-            modifier = Modifier
-                .fillMaxSize()
+            /* If I define these modifier directly into the function it
+            * doesn't work                      --  new (21-01-2024) */
+            modifier = Modifier.fillMaxSize()
                 .padding(8.dp)
             )
     }
@@ -112,7 +115,7 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
 * to the tool processing it */
 @Preview(
     showBackground = true,
-    //showSystemUi = true,
+    showSystemUi = true,
     name = "My preview"
 )
 @Composable
